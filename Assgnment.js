@@ -1,10 +1,182 @@
+var container = document.querySelector(".main");
+var body = document.getElementsByTagName("body")[0];
 
-var divTag = document.getElementById("myDiv")
+console.log(body);
 
-divTag.style.color="blue";
-divTag.style.backgroundColor= "yellow";
-divTag.style.width="300px"
-divTag.style.height="300px"
-divTag.style.padding="20px"
-divTag.style.margin="20px"
-divTag.style.fontWeight="bold"
+container.style.height = "100vh";
+container.style.width = "100wh";
+body.style.margin = "0px";
+body.style.padding = "0px";
+container.style.backgroundColor = "blue";
+
+const datadiv = document.createElement("div");
+datadiv.setAttribute("class", "data-div");
+
+const calculate = document.createElement("div");
+calculate.setAttribute("class", "calculate");
+
+const dateboxtag = document.createElement("input");
+dateboxtag.setAttribute("class", "dateboxtag");
+dateboxtag.type = "date";
+dateboxtag.style.height = "30px";
+dateboxtag.style.width = "120px";
+dateboxtag.style.borderRadius = "10px";
+dateboxtag.style.marginTop = "30px";
+
+const buttontag = document.createElement("button");
+buttontag.setAttribute("class", "calculate-btn");
+buttontag.innerText = "Calculate";
+buttontag.style.height = "35px";
+buttontag.style.width = "100px";
+
+buttontag.style.marginTop = "30px";
+buttontag.style.borderRadius = "10px";
+buttontag.style.backgroundColor = "white";
+
+buttontag.addEventListener("click", function () {
+  const datetext = dateboxtag.value;
+  console.log(datetext);
+  const dateObject = new Date(datetext);
+
+  const today = new Date();
+
+  if (today < dateObject) {
+    alert("Not born yet");
+    return;
+  }
+
+  let years = today.getFullYear() - dateObject.getFullYear();
+  let months = today.getMonth() - dateObject.getMonth();
+  let days = today.getDate() - dateObject.getDate();
+
+  if (days < 0) {
+    months--;
+
+    days = 30 + days;
+  }
+  if (months < 0) {
+    years--;
+
+    months = 12 + months;
+  }
+  if (years < 0) {
+    years = 0;
+  }
+
+  yeardiv.innerHTML = "";
+
+  const yeartag = document.createElement("p");
+  yeartag.innerText = years;
+  yeartag.style.color = "white";
+  yeartag.style.paddingBottom = "2px";
+  yeartag.style.marginLeft = "25px";
+
+  const yrptag = document.createElement("p");
+  yrptag.innerText = "Years";
+  yrptag.style.color = "white";
+  yrptag.style.paddingTop = "10px";
+  yrptag.style.marginLeft = "25px";
+
+  yeardiv.appendChild(yeartag);
+  yeardiv.appendChild(yrptag);
+
+  monthsdiv.innerHTML = "";
+
+  const mntag = document.createElement("p");
+  mntag.innerText = months;
+  mntag.style.color = "white";
+  mntag.style.paddingBottom = "2px";
+  mntag.style.marginLeft = "25px";
+
+  const monthsptag = document.createElement("p");
+  monthsptag.innerText = "Months";
+  monthsptag.style.color = "white";
+  monthsptag.style.marginTop = "10px";
+  monthsptag.style.marginLeft = "20px";
+
+  monthsdiv.appendChild(mntag);
+  monthsdiv.appendChild(monthsptag);
+
+  daysdiv.innerHTML = "";
+
+  const dytag = document.createElement("p");
+  dytag.innerText = days;
+  dytag.style.color = "white";
+  dytag.style.paddingBottom = "2px";
+  dytag.style.marginLeft = "25px";
+
+  const daysptag = document.createElement("p");
+  daysptag.innerText = "Days";
+  daysptag.style.color = "white";
+  daysptag.style.marginTop = "10px";
+  daysptag.style.marginLeft = "20px";
+
+  daysdiv.appendChild(dytag);
+  daysdiv.appendChild(daysptag);
+
+  console.log(years);
+  console.log(months);
+  console.log(days);
+});
+
+const agediv = document.createElement("div");
+agediv.setAttribute("class", "age-div");
+agediv.style.height = "50%";
+agediv.style.width = "100%";
+
+const yeardiv = document.createElement("div");
+yeardiv.setAttribute("class", "year-div");
+yeardiv.style.height = "100px";
+yeardiv.style.width = "100px";
+yeardiv.style.backgroundColor = "black";
+yeardiv.style.borderRadius = "20px";
+
+const yrptag = document.createElement("p");
+yrptag.innerText = "Years";
+yrptag.style.color = "white";
+yrptag.style.marginTop = "60px";
+yrptag.style.marginLeft = "25px";
+
+yeardiv.appendChild(yrptag);
+
+const monthsdiv = document.createElement("div");
+monthsdiv.setAttribute("class", "months-div");
+monthsdiv.style.height = "100px";
+monthsdiv.style.width = "100px";
+monthsdiv.style.backgroundColor = "black";
+monthsdiv.style.borderRadius = "20px";
+
+const monthsptag = document.createElement("p");
+monthsptag.innerText = "Months";
+monthsptag.style.color = "white";
+monthsptag.style.marginTop = "60px";
+monthsptag.style.marginLeft = "20px";
+
+monthsdiv.appendChild(monthsptag);
+
+const daysdiv = document.createElement("div");
+daysdiv.setAttribute("class", "days-div");
+daysdiv.style.height = "100px";
+daysdiv.style.width = "100px";
+daysdiv.style.backgroundColor = "black";
+daysdiv.style.borderRadius = "20px";
+
+const daysptag = document.createElement("p");
+daysptag.innerText = "Days";
+daysptag.style.color = "white";
+daysptag.style.marginTop = "60px";
+daysptag.style.marginLeft = "20px";
+
+daysdiv.appendChild(daysptag);
+
+agediv.appendChild(yeardiv);
+agediv.appendChild(monthsdiv);
+agediv.appendChild(daysdiv);
+
+calculate.appendChild(dateboxtag);
+calculate.appendChild(buttontag);
+datadiv.appendChild(calculate);
+datadiv.appendChild(agediv);
+container.appendChild(datadiv);
+
+console.log(calculate);
