@@ -140,10 +140,10 @@ product1MinusButton.addEventListener("click", function () {
   subtractItems(product1price.textContent);
 
   if (quantity === 0) {
-    rightcontainer.removeChild(productItems);
+    cart.removeChild(productItems);
   }
   if (sum === 0) {
-    rightcontainer.removeChild(sum1Items);
+    rightcontainer.removeChild(sumDiv);
   }
 });
 
@@ -254,10 +254,10 @@ product2MinusButton.addEventListener("click", function () {
   subtractItems(product2price.textContent);
 
   if (quantity === 0) {
-    rightcontainer.removeChild(product2Items);
+    cart.removeChild(product2Items);
   }
   if (sum === 0) {
-    rightcontainer.removeChild(sum1Items);
+    rightcontainer.removeChild(sumDiv);
   }
 });
 
@@ -369,10 +369,10 @@ product3MinusButton.addEventListener("click", function () {
   subtractItems(product3price.textContent);
 
   if (quantity === 0) {
-    rightcontainer.removeChild(product3Items);
+    cart.removeChild(product3Items);
   }
   if (sum === 0) {
-    rightcontainer.removeChild(sum1Items);
+    rightcontainer.removeChild(sumDiv);
   }
 });
 
