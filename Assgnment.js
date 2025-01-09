@@ -1,237 +1,141 @@
 var container = document.querySelector(".main");
 
-const h1tag = document.createElement("h1");
-h1tag.innerText = "🏆LEADERBOARD🏆";
-h1tag.style.color = "White";
-h1tag.style.width = "100%";
-h1tag.style.textAlign = "center";
-h1tag.style.fontSize = "67px";
 
-const playersAddDiv = document.createElement("form");
-playersAddDiv.style.display = "flex";
-playersAddDiv.style.justifyContent = "center";
-playersAddDiv.style.gap = "20px";
-playersAddDiv.style.padding = "20px";
-playersAddDiv.style.width = "60%";
-playersAddDiv.style.backgroundColor = "blue";
-playersAddDiv.style.marginLeft = "20%";
+const TimeDiv = document.createElement('div')
+TimeDiv.style.height = '150px'
+TimeDiv.style.width = '400px'
+TimeDiv.style.backgroundColor = 'transparent'
+TimeDiv.style.position = 'absolute'
+TimeDiv.style.top = '40%'
+TimeDiv.style.left = '35%'
+TimeDiv.style.display = 'flex'
+TimeDiv.style.justifyContent = 'space-between'
 
-const firstName = document.createElement("input");
-firstName.setAttribute("type", "text");
-firstName.setAttribute("placeholder", "First Name");
-firstName.style.backgroundColor = "White";
-firstName.style.height = "40px";
-playersAddDiv.appendChild(firstName);
+const img = document.createElement('img')
+img.src = 'wallpaper.jpg'
+img.style.width = '100vw'
+img.style.height = '100vh'
+img.style.height = 'absolute'
+img.style.backgroundRepeat = 'no-repeat'
 
-const lastName = document.createElement("input");
-lastName.setAttribute("type", "text");
-lastName.setAttribute("placeholder", "Last Name");
-lastName.style.backgroundColor = "White";
-playersAddDiv.appendChild(lastName);
-
-const selectTag = document.createElement("select");
-selectTag.setAttribute("type", "text");
-selectTag.setAttribute("placeholder", "Select Country");
-selectTag.style.backgroundColor = "White";
-
-const options = ["India", "Australia", "England", "Sri Lanka", "Pakistan"];
-
-const placeholderOption = document.createElement("option");
-placeholderOption.innerText = "Select Country";
-placeholderOption.disabled = true;
-placeholderOption.selected = true;
-selectTag.appendChild(placeholderOption);
-
-options.forEach((option) => {
-  const optionTag = document.createElement("option");
-  optionTag.innerText = option;
-  selectTag.appendChild(optionTag);
-});
-
-const score = document.createElement("input");
-score.setAttribute("type", "text");
-score.setAttribute("placeholder", "Score");
-score.style.backgroundColor = "White";
-score.addEventListener("input", () => {
-  console.log(61);
-  if (isNaN(score.value)) {
-    console.log(63);
-    score.innerText = "";
-    return;
-  }
-});
-
-playersAddDiv.appendChild(selectTag);
-playersAddDiv.appendChild(score);
-
-const addButton = document.createElement("button");
-// score.setAttribute('placeholder','Score')
-addButton.innerText = "Add Score";
-addButton.style.backgroundColor = "White";
-addButton.style.border = "none";
-addButton.style.borderRadius = "5px";
+const h1 = document.createElement('h1')
+h1.innerText = 'Digital Clock'
+h1.style.color = 'yellow'
+h1.style.position = 'absolute'
+h1.style.top = '30%'
+h1.style.left = '40%'
+h1.style.fontWeight = '100'
 
 
-const dataDiv = document.createElement("div");
-dataDiv.style.width = "60%";
-dataDiv.style.marginLeft = "20%";
-dataDiv.style.border = "2px solid blue";
-dataDiv.style.padding = "20px";
-
-const value = [];
-let count = 0
-addButton.addEventListener("click", (event) => {
-
-  
-
-  event.preventDefault();
-  dataDiv.innerHTML = "";
-  if (
-    firstName.value === "" ||
-    lastName.value === "" ||
-    score.value === "" ||
-    selectTag.value === "Select Country"
-  ) {
-    alert("Enter all the fields");
-    return;
-  }
-
-
-  value.push({
-    id : ++count,
-    firstName: firstName.value,
-    lastName: lastName.value,
-    country: selectTag.value,
-    score: score.value,
-  });
-  firstName.value = "";
-  lastName.value = "";
-  score.value = "";
-  selectTag.value = "Select Country";
-
-  console.log(value);
-
-  
-
-  load()
-
-  container.appendChild(dataDiv);
-});
-
-function load()
+function update()
 {
-  value.sort((a,b) => b.score - a.score)
-  dataDiv.innerHTML =''
-  if(value.length ===0)
-    {
-      return
-    }
-  value.forEach((data) => {
-  const player = document.createElement("div");
-  player.style.width = "90%";
-  player.style.marginLeft = "2%";
-  player.style.marginTop = "2%";
-  player.style.backgroundColor = "blue";
-  player.style.padding = "20px";
-  player.style.display = "flex";
-  player.style.justifyContent = "space-between";
-  player.style.borderTopRightRadius = "20px";
-  player.style.borderBottomRightRadiuss = "20px";
+    TimeDiv.innerHTML =''
+const date = new Date();
 
-  const first = document.createElement("p");
-  first.innerText = data.firstName+" "+data.lastName;
-  first.style.color = "white";
-  first.style.backgroundColor = "blue";
-
-  const country = document.createElement("p");
-  country.innerText = data.country;
-  country.style.color = "white";
-  country.style.backgroundColor = "blue";
-
-  const score = document.createElement("p");
-  score.innerText = data.score;
-  score.style.color = "white";
-  score.style.backgroundColor = "blue";
-
-  const deleteDiv = document.createElement("div");
-  deleteDiv.style.backgroundColor = "blue";
-  deleteDiv.style.width = '40%'
-  deleteDiv.style.display = 'flex'
-  deleteDiv.style.justifyContent = 'space-around'
-
-
-  const img = document.createElement("img");
-  img.src = 'delete-button-svgrepo-com.svg'
-  img.style.height ='20px'
-  img.style.width ='20px'
-  img.style.backgroundColor ='transparent'
-  img.style.cursor = 'pointer'
-  img.addEventListener('click', () =>
-  {
-    value.pop(data.id)
-    load()
-  })
-
-  const product1PlusButton = document.createElement("button");
-product1PlusButton.classList.add("plus-minus");
-product1PlusButton.innerText = "+5";
-product1PlusButton.style.fontSize = "large";
-product1PlusButton.style.cursor = 'pointer'
-
-const product1minusButton = document.createElement("button");
-product1minusButton.classList.add("plus-minus");
-product1minusButton.innerText = "-5";
-product1minusButton.style.fontSize = "large";
-product1minusButton.style.cursor = 'pointer'
-
-product1PlusButton.addEventListener("click", function () {
-
-let quantity = parseInt(data.score);
-
-quantity +=5
-data.score = quantity
-score.innerText = quantity;
-
-load()
-
-});
-
-product1minusButton.addEventListener("click", function () {
-
-let quantity = parseInt(data.score);
-
-quantity -=5
-if(quantity<0)
+let ampm = "AM";
+if(date.getHours()>11)
 {
-  alert("Score can not be negative")
-  quantity +=5
+    ampm = 'PM'
 }
-data.score = quantity
-score.innerText = quantity;
-load()
-});
 
-  deleteDiv.appendChild(img)
-  deleteDiv.appendChild(product1PlusButton)
-  deleteDiv.appendChild(product1minusButton)
-  // const country = document.createElement("p");
-  // country.innerText = data.country;
-  // country.style.color = "white";
-  // country.style.backgroundColor = "blue";
+console.log(date.getHours())
+console.log(date.getMinutes())
+console.log(date.getSeconds())
 
-  // const score = document.createElement("p");
-  // score.innerText = data.score;
-  // score.style.color = "white";
-  // score.style.backgroundColor = "blue";
 
-  player.appendChild(first);
-  player.appendChild(country);
-  player.appendChild(score);
-  player.appendChild(deleteDiv);
-  dataDiv.appendChild(player);
-});}
 
-playersAddDiv.appendChild(addButton);
 
-container.appendChild(h1tag);
-container.appendChild(playersAddDiv);
+
+
+
+const hourDiv = document.createElement('div')
+hourDiv.style.height = '150px'
+hourDiv.style.width = '100px'
+hourDiv.style.backgroundColor = 'transparent'
+hourDiv.style.textAlign ='center'
+hourDiv.style.background = 'rgba(0,0,0, 0.9)'
+hourDiv.style.borderRadius = '10px'
+
+const hourspan = document.createElement('span')
+hourspan.innerText = (date.getHours() % 12)
+hourspan.style.color = 'white'
+hourspan.style.fontSize ='50px'
+
+const hourspan1 = document.createElement('p')
+hourspan1.innerText = 'Minutes'
+hourspan1.style.color = 'white'
+hourspan1.style.fontSize ='20px'
+hourspan1.style.top ='50px'
+
+hourDiv.appendChild(hourspan)
+hourDiv.appendChild(hourspan1)
+
+TimeDiv.appendChild(hourDiv)
+const minuteDiv = document.createElement('div')
+minuteDiv.style.height = '150px'
+minuteDiv.style.width = '100px'
+minuteDiv.style.background = 'rgba(0,0,0, 0.9)'
+minuteDiv.style.textAlign ='center'
+minuteDiv.style.borderRadius = '10px'
+
+const minutespan = document.createElement('span')
+minutespan.innerText = date.getMinutes()
+minutespan.style.color = 'white'
+minutespan.style.fontSize ='50px'
+
+const minutepan1 = document.createElement('p')
+minutepan1.innerText = 'Minutes'
+minutepan1.style.color = 'white'
+minutepan1.style.fontSize ='20px'
+minutepan1.style.top ='50px'
+
+minuteDiv.appendChild(minutespan)
+minuteDiv.appendChild(minutepan1)
+
+TimeDiv.appendChild(minuteDiv)
+
+const secondsDiv = document.createElement('div')
+secondsDiv.style.height = '150px'
+secondsDiv.style.width = '100px'
+secondsDiv.style.background = 'rgba(0,0,0, 0.9)'
+secondsDiv.style.textAlign ='center'
+secondsDiv.style.borderRadius = '10px'
+
+secondsDiv.style.flexDirection ='column'
+secondsDiv.style.alignContent ='space-between'
+
+const secondspan = document.createElement('span')
+secondspan.innerText = date.getSeconds()
+secondspan.style.color = 'white'
+secondspan.style.fontSize ='50px'
+
+const secondspan1 = document.createElement('p')
+secondspan1.innerText = 'Seconds'
+secondspan1.style.color = 'white'
+secondspan1.style.fontSize ='20px'
+secondspan1.style.top ='50px'
+
+secondsDiv.appendChild(secondspan)
+secondsDiv.appendChild(secondspan1)
+TimeDiv.appendChild(secondsDiv)
+
+const ampmSpan = document.createElement('span')
+ampmSpan.innerText = ampm
+ampmSpan.style.color = 'white'
+ampmSpan.style.textAlign ='center'
+ampmSpan.style.fontSize ='20px'
+ampmSpan.style.top = '86%'
+
+TimeDiv.appendChild(secondsDiv)
+TimeDiv.appendChild(ampmSpan)
+
+
+container.appendChild(h1)
+container.appendChild(TimeDiv)
+    setTimeout(()=>
+        {
+            update()
+        },1000)
+}
+container.appendChild(img)
+update()
