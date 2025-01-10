@@ -156,6 +156,11 @@ function start()
 {
     if(timer)
     {
+        if(count<10)
+            {
+                count='0'+count
+                
+            }
     if(count==100)
     {
         count=0
