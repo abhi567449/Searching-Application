@@ -3,29 +3,198 @@ var container = document.querySelector(".main");
 
 const TimeDiv = document.createElement('div')
 TimeDiv.style.height = '150px'
-TimeDiv.style.width = '400px'
+TimeDiv.style.width = '700px'
 TimeDiv.style.backgroundColor = 'transparent'
 TimeDiv.style.position = 'absolute'
-TimeDiv.style.top = '40%'
-TimeDiv.style.left = '35%'
+TimeDiv.style.top = '60%'
+TimeDiv.style.left = '25%'
 TimeDiv.style.display = 'flex'
 TimeDiv.style.justifyContent = 'space-between'
 
-const img = document.createElement('img')
-img.src = 'wallpaper.jpg'
-img.style.width = '100vw'
-img.style.height = '100vh'
-img.style.height = 'absolute'
-img.style.backgroundRepeat = 'no-repeat'
 
-const h1 = document.createElement('h1')
-h1.innerText = 'Digital Clock'
-h1.style.color = 'yellow'
-h1.style.position = 'absolute'
-h1.style.top = '30%'
-h1.style.left = '40%'
-h1.style.fontWeight = '100'
+const startButton = document.createElement('button')
+startButton.innerText = 'Start'
+startButton.style.border = '0px'
+startButton.style.height = '70px'
+startButton.style.width = '200px'
+startButton.style.backgroundColor = '#ce6767de'
+startButton.style.boxShadow = '5px 5px 5px 2px rgba(189, 115, 115, 0.87)'
 
+startButton.style.borderRadius = '20px'
+startButton.style.fontSize = '30px'
+startButton.style.cursor = 'pointer'
+
+
+const calculateDiv = document.createElement('div')
+calculateDiv.style.height = '150px'
+calculateDiv.style.width = '700px'
+calculateDiv.style.backgroundColor = 'transparent'
+calculateDiv.style.position = 'absolute'
+calculateDiv.style.top = '30%'
+calculateDiv.style.left = '30%'
+calculateDiv.style.display = 'flex'
+
+const hourspan1 = document.createElement('span')
+
+
+function updateHours(hours)
+{
+    if(hours<10)
+        {
+            hours='0'+hours;
+        }
+
+    hourspan1.innerText = '00'+':'
+    hourspan1.style.color = '#ce6767de'
+    hourspan1.style.fontSize ='120px'
+    hourspan1.style.top ='50px'
+    calculateDiv.appendChild(hourspan1)
+}
+
+updateHours(0)
+
+const minutepan1 = document.createElement('span')
+
+function updateMinutes(minutes)
+{
+    if(minutes<10)
+        {
+            minutes='0'+minutes;
+        }
+    minutepan1.innerHTML=''
+    minutepan1.innerText = minutes+':'
+    minutepan1.style.color = '#ce6767de'
+    minutepan1.style.fontSize ='120px'
+    minutepan1.style.top ='50px'
+
+    calculateDiv.appendChild(minutepan1)
+}
+updateMinutes(0)
+
+const secondspan1 = document.createElement('span')
+function updateSeconds(second)
+{
+    if(second<10)
+    {
+        second='0'+second;
+    }
+    secondspan1.innerHTML = ''
+    secondspan1.innerText = second
+    secondspan1.style.color = '#ce6767de'
+    secondspan1.style.fontSize ='120px'
+    secondspan1.style.top ='50px'
+
+    calculateDiv.appendChild(secondspan1)
+}
+updateSeconds(0)
+
+
+container.appendChild(calculateDiv)
+
+const stopButton = document.createElement('button')
+stopButton.innerText = 'Stop'
+stopButton.style.border = '0px'
+stopButton.style.height = '70px'
+stopButton.style.width = '200px'
+stopButton.style.backgroundColor = '#ce6767de'
+stopButton.style.boxShadow = '5px 5px 5px 2px rgba(189, 115, 115, 0.87)'
+
+stopButton.style.borderRadius = '20px'
+stopButton.style.fontSize = '30px'
+stopButton.style.cursor = 'pointer'
+stopButton.disabled = true
+stopButton.addEventListener('click', () =>
+{
+    stopButton.disabled = true
+    startButton.disabled = false
+    timer =false
+})
+
+const resetButton = document.createElement('button')
+resetButton.innerText = 'Reset'
+resetButton.style.border = '0px'
+resetButton.style.height = '70px'
+resetButton.style.width = '200px'
+resetButton.style.backgroundColor = '#ce6767de'
+resetButton.style.boxShadow = '5px 5px 5px 2px rgba(189, 115, 115, 0.87)'
+
+resetButton.style.borderRadius = '20px'
+resetButton.style.fontSize = '30px'
+resetButton.style.cursor = 'pointer'
+resetButton.addEventListener('click', ()=>
+{
+    timer =false;
+     count = 0;
+ second = 0;
+ minutes = 0;
+ hours = 0;
+ updateHours(0)
+ updateMinutes(0)
+  updateSeconds(0)
+  calculateDiv.removeChild(millispan1)
+  stopButton.disabled = true
+  startButton.disabled = false
+
+})
+
+startButton.addEventListener('click', () =>
+{
+    stopButton.disabled = false
+    startButton.disabled = true
+    timer =true;
+    start();
+})
+
+const millispan1 = document.createElement('span')
+
+let count = 0;
+let second = 0;
+let minutes = 0;
+let hours = 0;
+let timer = true;
+function start()
+{
+    if(timer)
+    {
+    if(count==100)
+    {
+        count=0
+        second++
+       updateSeconds(second)
+    }
+    if(second==60)
+        {
+            second=0
+            minutes++
+            updateMinutes(minutes)
+            updateSeconds(second)
+        }
+        if(minutes==60)
+            {
+                minutes=0
+                hours++
+                updateHours(hours)
+                updateMinutes(minutes)
+                 updateSeconds(second)
+            }
+
+    millispan1.innerHTML =''
+millispan1.innerText = ':'+ parseInt(count++)
+millispan1.style.color = '#ce6767de'
+millispan1.style.fontSize ='120px'
+millispan1.style.top ='50px'
+calculateDiv.appendChild(millispan1)
+setTimeout(()=>
+{
+start()
+},10)
+}
+}
+TimeDiv.appendChild(startButton)
+TimeDiv.appendChild(stopButton)
+TimeDiv.appendChild(resetButton)
+
+container.appendChild(TimeDiv)
 
 function update()
 {
@@ -129,13 +298,10 @@ ampmSpan.style.top = '86%'
 TimeDiv.appendChild(secondsDiv)
 TimeDiv.appendChild(ampmSpan)
 
-
-container.appendChild(h1)
 container.appendChild(TimeDiv)
     setTimeout(()=>
         {
             update()
         },1000)
 }
-container.appendChild(img)
-update()
+//update()
