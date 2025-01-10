@@ -114,6 +114,7 @@ checkboxburger.setAttribute("value", "Burger");
 const labelburger = document.createElement("label");
 labelburger.innerText = "Burger";
 labelburger.setAttribute("for", "Burger");
+labelburger.style.alignContent='center'
 
 const checkboxDrink = document.createElement("input");
 checkboxDrink.setAttribute("type", "checkbox");
@@ -123,6 +124,7 @@ checkboxDrink.setAttribute("value", "Drink");
 const labelDrink = document.createElement("label");
 labelDrink.innerText = "Drink";
 labelDrink.setAttribute("for", "Drink");
+labelDrink.style.alignContent='center'
 
 const checkboxFries = document.createElement("input");
 checkboxFries.setAttribute("type", "checkbox");
@@ -132,6 +134,7 @@ checkboxFries.setAttribute("value", "Fries");
 const labelFries = document.createElement("label");
 labelFries.innerText = "Fries";
 labelFries.setAttribute("for", "Fries");
+labelFries.style.alignContent='center'
 
 orderform.appendChild(checkboxburger);
 orderform.appendChild(labelburger);
