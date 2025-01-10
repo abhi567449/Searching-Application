@@ -184,10 +184,11 @@ function start()
             }
 
     millispan1.innerHTML =''
-millispan1.innerText = ':'+ parseInt(count++)
+millispan1.innerText = ':'+ count
 millispan1.style.color = '#ce6767de'
 millispan1.style.fontSize ='120px'
 millispan1.style.top ='50px'
+count++;
 calculateDiv.appendChild(millispan1)
 setTimeout(()=>
 {
