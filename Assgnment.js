@@ -1,218 +1,119 @@
 var container = document.querySelector(".main");
 
-const orderDiv = document.createElement("div");
-orderDiv.style.width = "30%";
-orderDiv.style.height = "20%";
-orderDiv.style.marginLeft = "34%";
-orderDiv.style.display = "flex";
-orderDiv.style.flexWrap = "wrap";
-orderDiv.style.justifyContent = "space-evenly";
-orderDiv.style.position = "absolute";
+let page =1
+const accessKey ='msCG8NItt7Xc38_yT4Xn5iyUsUwFbw7jgXltteVh7-M'
 
 
-const orderIdP = document.createElement("p");
-orderIdP.style.color = 'rgba(48, 35, 31, 0.69)'
-orderIdP.style.left = '90%'
+
+
+const heading = document.createElement("h1");
+heading.innerText ='Images Search App'
+heading.style.textAlign ='center'
+heading.style.top ='20px'
+
+const inputData = document.createElement("input");
+inputData.setAttribute("type", "text");
+inputData.setAttribute("placeholder", "Search for images...");
+inputData.style.width ='20%'
+inputData.style.height ='4%'
+inputData.style.padding ='5px'
+inputData.style.borderRadius ='5px'
+inputData.style.border ='None'
+inputData.style.left = '35%'
+inputData.style.top ='50px'
 
 const button = document.createElement("button");
-button.innerText = "Order Food";
-button.style.border = "none";
-button.style.borderRadius = "20px";
-button.style.color = "rgba(48, 35, 31, 0.69)";
-button.style.fontSize = "20px";
-button.style.width = "100%";
-button.style.cursor = "pointer";
-button.style.backgroundColor = "rgba(238, 102, 60, 0.692)";
-button.style.boxShadow = "3px 3px 3px 1px rgba(136, 95, 82, 0.69) ";
+button.innerText = 'Search'
+button.style.width ='10%'
+button.style.height ='5%'
+button.style.padding ='5px'
+button.style.borderRadius ='5px'
+button.style.border ='None'
+button.style.left = '35%'
+button.style.cursor = 'pointer'
+button.style.backgroundColor = 'lightgreen'
+button.style.top ='50px'
+button.style.boxShadow = "3px 3px 3px 1px rgba(136, 95, 82, 0.69) "
 
-button.addEventListener("click", () => {
 
-    const promise = new Promise(function(resolved,reject)
-{
-    setTimeout(function()
-{
-    resolved()
-},getRandomSec())
-})
 
-function getRandomSec()
+const imageDiv = document.createElement("div");
+imageDiv.style.display ='flex'
+imageDiv.style.justifyContent ='space-around'
+imageDiv.style.flexWrap ='wrap'
+imageDiv.style.overflow ='scroll'
+imageDiv.style.top ='150px'
+button.addEventListener('click', ()=>
 {
-    let sec = Math.floor(Math.random() * 1000) +100
-   
-    return sec
-}
-function getRandomOrderId()
-{
-    let sec = Math.floor(Math.random() * 5000) +100
-   
-    return sec
-}
+    const promise = new Promise(function(resolve,reject)
+    {
+        resolve();
+    })
 
     promise.then(function()
 {
-    let food = "";
-    button.disabled = true;
-    button.style.backgroundColor = "rgba(209, 138, 119, 0.69)";
-    imgDiv.innerHTML = ''
-
-    let orderId = getRandomOrderId()
-    orderIdP.innerText = 'Order Id: '+orderId
-    container.appendChild(orderIdP)
-    if (checkboxburger.checked) {
-      imgBurger.src =
-        "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVyZ2VyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60";
-        imgDiv.appendChild(imgBurger);
-    }
-    if (checkboxFries.checked) {
-      imgDrink.src =
-        "https://images.unsplash.com/photo-1576107232684-1279f390859f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZnJpZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60";
-        imgDiv.appendChild(imgDrink);
-    }
-    if (checkboxDrink.checked) {
-      imgFries.src =
-        "https://images.unsplash.com/photo-1437418747212-8d9709afab22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZHJpbmt8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60";
-        imgDiv.appendChild(imgFries);
-    }
-
-    container.appendChild(imgDiv)
+    
+load()
+showbutton.addEventListener('click', () =>
+{
+    load()
+})
 })
 
- 
-  
-});
+async function load(params) {
+    if(page===1)
+        {
+            imageDiv.innerHTML = ''
+        }
+        
+    const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputData.value}&client_id=${accessKey}`;
+    let response =await fetch(url)
+    let data = await response.json();
+    console.log(data.results)
 
-const imgDiv = document.createElement("div");
+    const res = data.results
+    page++;
 
-imgDiv.style.width = '100%'
-imgDiv.style.height = '500px'
-imgDiv.style.top = '200px'
-imgDiv.style.display = 'flex'
-imgDiv.style.justifyContent = 'space-evenly'
+    res.map(result => {
+        const imageWrapper = document.createElement("div");
+        imageWrapper.classList.add("search-result");
+        const image = document.createElement("img");
+        image.src = result.urls.small;
+        image.alt = result.alt_description;
+        image.style.height = '200px'
+        image.style.width = '100%'
+        const imageLink = document.createElement("a");
+        imageLink.href = result.links.html;
+        imageLink.target = "_blank";
+        imageLink.textContent = result.alt_description;
+    
+        imageWrapper.appendChild(image);
+        imageWrapper.appendChild(imageLink);
+        imageDiv.appendChild(imageWrapper);
+    });
 
-const imgBurger = document.createElement("img");
-imgBurger.style.width = "300px";
-imgBurger.style.height = "400px";
+    
+container.appendChild(showbutton)
+}
+})
 
-const imgFries = document.createElement("img");
-imgFries.style.width = "300px";
-imgFries.style.height = "400px";
+container.appendChild(heading)
+container.appendChild(inputData)
+container.appendChild(button)
+container.appendChild(imageDiv)
 
-const imgDrink = document.createElement("img");
-imgDrink.style.width = "300px";
-imgDrink.style.height = "400px";
+const showbutton = document.createElement("button");
+showbutton.innerText = 'Show More'
+showbutton.style.width ='8%'
+showbutton.style.height ='5%'
+showbutton.style.padding ='10px'
+showbutton.style.borderRadius ='5px'
+showbutton.style.border ='None'
+showbutton.style.backgroundColor ='blue'
+showbutton.style.color ='white'
+showbutton.style.cursor ='pointer'
+showbutton.style.marginLeft ='47%'
+showbutton.style.marginTop ='10%'
+showbutton.style.marginBottom ='10%'
 
 
-const orderform = document.createElement("form");
-orderform.style.gap = "30px";
-orderform.style.display = "flex";
-
-const checkboxburger = document.createElement("input");
-checkboxburger.setAttribute("type", "checkbox");
-checkboxburger.setAttribute("name", "Burger");
-checkboxburger.setAttribute("value", "Burger");
-
-const labelburger = document.createElement("label");
-labelburger.innerText = "Burger";
-labelburger.setAttribute("for", "Burger");
-labelburger.style.alignContent='center'
-
-const checkboxDrink = document.createElement("input");
-checkboxDrink.setAttribute("type", "checkbox");
-checkboxDrink.setAttribute("name", "Drink");
-checkboxDrink.setAttribute("value", "Drink");
-
-const labelDrink = document.createElement("label");
-labelDrink.innerText = "Drink";
-labelDrink.setAttribute("for", "Drink");
-labelDrink.style.alignContent='center'
-
-const checkboxFries = document.createElement("input");
-checkboxFries.setAttribute("type", "checkbox");
-checkboxFries.setAttribute("name", "Fries");
-checkboxFries.setAttribute("value", "Fries");
-
-const labelFries = document.createElement("label");
-labelFries.innerText = "Fries";
-labelFries.setAttribute("for", "Fries");
-labelFries.style.alignContent='center'
-
-orderform.appendChild(checkboxburger);
-orderform.appendChild(labelburger);
-orderform.appendChild(checkboxDrink);
-orderform.appendChild(labelDrink);
-orderform.appendChild(checkboxFries);
-orderform.appendChild(labelFries);
-orderDiv.appendChild(button);
-orderDiv.appendChild(orderform);
-
-container.appendChild(orderDiv);
-
-// const jokeDiv = document.createElement('div')
-// jokeDiv.style.height = '300px'
-// jokeDiv.style.width = '500px'
-// jokeDiv.style.backgroundColor = 'rgba(238, 102, 60, 0.692)'
-// jokeDiv.style.position = 'absolute'
-// jokeDiv.style.top = '38%'
-// jokeDiv.style.left = '33%'
-// jokeDiv.style.borderRadius = '20px'
-
-// const headpan1 = document.createElement('p')
-// headpan1.innerText = 'Dad Jokes Generator'
-// headpan1.style.color = 'white'
-// headpan1.style.fontSize ='20px'
-// headpan1.style.top ='10px'
-// headpan1.style.left ='30%'
-
-// const jokepan1 = document.createElement('p')
-// jokepan1.innerText = 'Dad Joke'
-// jokepan1.style.color = 'white'
-// jokepan1.style.fontSize ='20px'
-// jokepan1.style.top ='40px'
-// jokepan1.style.textAlign ='center'
-
-// const button = document.createElement('button')
-// button.innerText = 'Tell me a Joke'
-// button.style.border = 'none'
-// button.style.borderRadius = '20px'
-// button.style.color = 'white'
-// button.style.fontSize ='20px'
-// button.style.top ='200px'
-// button.style.left ='30%'
-// button.style.width ='200px'
-// button.style.cursor ='pointer'
-// button.style.backgroundColor = 'rgba(238, 102, 60, 0.692)'
-// button.style.boxShadow = '3px 3px 3px 1px rgba(136, 95, 82, 0.69) '
-// button.style.position = 'absolute'
-// button.addEventListener('click', getJoke)
-
-// jokeDiv.appendChild(headpan1)
-// jokeDiv.appendChild(jokepan1)
-// jokeDiv.appendChild(button)
-// container.appendChild(jokeDiv)
-
-// let api_url = 'https://api.api-ninjas.com/v1/dadjokes?';
-// let options = {
-//     method : 'GET',
-//     headers : {
-//         'X-Api-Key' : 'Y/CmmirbQHgq7LVJEILY0w==I181IgAvrrszpwl8'
-//     }
-// }
-
-// async function getJoke()
-// {
-//     try
-//     {
-//         jokepan1.innerText = 'Updating...'
-
-//         let response = await fetch(api_url,options)
-//         const data = await response.json();
-//         jokepan1.innerText = data[0].joke
-
-//         console.log(data[0].joke)
-//     }
-//     catch(error)
-//     {
-//         console.error()
-//     };
-
-// }
