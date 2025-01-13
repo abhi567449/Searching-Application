@@ -41,7 +41,6 @@ const imageDiv = document.createElement("div");
 imageDiv.style.display ='flex'
 imageDiv.style.justifyContent ='space-around'
 imageDiv.style.flexWrap ='wrap'
-imageDiv.style.overflow ='scroll'
 imageDiv.style.top ='150px'
 button.addEventListener('click', ()=>
 {
