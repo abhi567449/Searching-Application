@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeeksterMon</title>
+    <title>Card</title>
 </head>
 <style>
   .main{
@@ -11,98 +11,73 @@
     justify-content: center;
    
   }
-  body{
-    background-color: rgba(167, 160, 158, 0.219);
-  }
+body
+{
+  background-color: rgb(226, 229, 231);
+}
   *
   {
     margin: 0px;
     font-family:  serif;
   }
+  .main
+  {
+    height: 300px;
+    width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    margin-top : 10%;
+    margin-left: 30%;
+  }
   h1{
     text-align: center;
+    font-size: 25px;
     padding: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 80px;
-    font-weight: 900;
   }
-  .filter-div
-  {
-    margin-left: 40%;
-    align-content: center;
-    width: 20%;
-    height: 20%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-  }
-  button
-  {
-    height: 20px;
-  }
-  option{
-    background-color: white;
-  }
-  .flip-front, .flip-back
-  {
-    height: 300px;
-    width: 200px;
-    border: 2px solid black;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 5px 5px 5px 2px gray;
-    position: absolute;
-    backface-visibility: hidden;
-  }
-  #pokemon-data
-  {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 40px;
-
-  }
-  .flip-card
-  {
-    width: 200px;
-    height: 300px;
-    perspective: 1000px;
-    
-  }
-  .flip-inner{
-    transition: transform 0.6s;
-  transform-style: preserve-3d;
-  }
-  .flip-card:hover .flip-inner
-  {
-  transform: rotateY(180deg);
-  }
-  .flip-back{
-    transform: rotateY(180deg);
-  }
- 
+ .details
+ {
+  margin-bottom: 7px;
+  display: flex;
+  justify-content: space-around;
+ }
 
 </style>
 <body>
   <div class="main">
-   <header>
-   <h1>GeeksterMon</h1>
-   </header>
-
-  <div class="filter-div">
-    <select id = 'type' name = 'types'>
-      <option for="'types" >Types</option>
-    </select>
-    <button id ='filter-by-type'>Filter By Type</button>
-    <button id ='Reset'>Reset</button>
-    <input id='search-btn' type='text' placeholder="Search pokemon..."></input>
-  </div>
-  <div id = 'pokemon-data'>
+    <h1>User Information Card</h1>
     
-  </div>
-  </div>
+    <div class = 'details'>
+      <label>First Name : </label>
+      <p id="firstname"></p>
+    </div>
+    <div class = 'details'>
+      <label>Last Name : </label>
+      <p id="lastname"></p>
+    </div>
+
+    <div class = 'details'>
+      <label>Country : </label>
+      <p id="country"></p>
+    </div>
+    <div class = 'details'>
+      <label>Phone No. : </label>
+      <p id="phoneNo"></p>
+    </div>
+    <div class = 'details'>
+      <label>State : </label>
+      <p id="state"></p>
+    </div>
+    <div class = 'details'>
+      <label>City : </label>
+      <p id="city"></p>
+    </div>
+    <div class = 'details'>
+      <label>Village : </label>
+      <p id="village"></p>
+    </div>
+    
+    
+   
   </div>
   <script src="Assgnment.js"></script>
 </body>
