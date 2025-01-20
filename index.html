@@ -22,29 +22,39 @@ body
   }
   .main
   {
-    height: 300px;
-    width: 500px;
-    background-color: white;
     border-radius: 10px;
-    margin-top : 10%;
-    margin-left: 30%;
+    margin-top : 6%;
+   
   }
-  h1{
-    text-align: center;
-  }
-  textarea
+  input
   {
-    margin-left: 10px;
-    width: 90%;
-    height: 80%;
+    width: 300px;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    margin-left: 42%;
   }
+  .image-div
+  {
+    
+  }
+  #movies
+  {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 30px;
+    gap: 20px;
+  }
+  
 </style>
 <body>
   <div class="main">
-    <h1>Auto Save Text</h1>
-    <textarea id="text-area" rows="10" cols="50" ></textarea>  
-        
-   
+     <input id="search" type="text" placeholder="search movies..."></input>
+     <div id ='movies'>
+      
+     </div>
   </div>
   <script src="Assgnment.js"></script>
 </body>
