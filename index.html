@@ -1,61 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Save Text</title>
-</head>
-<style>
-  .main{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    justify-content: center;
-   
-  }
-body
-{
-  background-color: rgb(226, 229, 231);
-}
-  *
-  {
-    margin: 0px;
-    font-family:  serif;
-  }
-  .main
-  {
-    border-radius: 10px;
-    margin-top : 6%;
-   
-  }
-  input
-  {
-    width: 300px;
-    border: none;
-    border-radius: 20px;
-    padding: 10px;
-    margin-left: 42%;
-  }
-  .image-div
-  {
-    
-  }
-  #movies
-  {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    padding: 30px;
-    gap: 20px;
-  }
-  
-</style>
-<body>
-  <div class="main">
-     <input id="search" type="text" placeholder="search movies..."></input>
-     <div id ='movies'>
-      
-     </div>
-  </div>
-  <script src="Assgnment.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Application</title>
+  </head>
+  <style>
+    .main {
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+      justify-content: space-between;
+      display: flex;
+    }
+
+    * {
+      margin: 0px;
+      font-family: serif;
+    }
+    .main {
+      border-radius: 10px;
+    }
+
+    #nav-img {
+      width: 20px;
+      height: 20px;
+      margin-left: 20px;
+      cursor: pointer;
+      margin-top: 8%;
+      padding: 10px;
+    }
+    #side-nav.expanded {
+      width: 200px;
+    }
+    #side-nav {
+      background-color: rgb(226, 229, 231);
+      width: 150px;
+      height: 100vh;
+      position: fixed;
+    }
+
+    .chat-div {
+      background-color: rgb(221, 221, 221);
+      padding: 20px;
+      border-radius: 20px;
+      margin: 20px;
+      width: 20px;
+    }
+    .chats-icon {
+      width: 20px;
+      height: 20px;
+      margin-left: 20px;
+    }
+    .chat-icon {
+      width: 20px;
+      height: 20px;
+      margin-left: 20px;
+      margin-top: 8%;
+      padding: 10px;
+    }
+    .recent {
+      padding-left: 10px;
+      visibility: hidden;
+      height: 160px;
+    }
+    .recent-chat-ptags {
+      width: 120px;
+      margin-bottom: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .chats {
+      display: flex;
+      gap: 20px;
+      padding-top: 14px;
+
+      height: 40px;
+    }
+    .chats:hover {
+      background-color: rgb(221, 221, 221);
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    #footer {
+      margin-top: 100px;
+      position: absolute;
+      padding: 20px;
+    }
+    .help-icon,
+    .setting-icon,
+    .activity-icon,
+    .search-box-img {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      padding: 10px;
+    }
+    .footer-div {
+      display: flex;
+      gap: 10px;
+    }
+    .footer-span {
+      margin-top: 10px;
+      visibility: hidden;
+    }
+    .data-div {
+      margin-left: 14%;
+      height: 100%;
+    }
+    .heading-tag {
+      margin-top: 20px;
+      margin-left: 40px;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    .data-header-div {
+      margin-top: 20px;
+    }
+    .suggestion-div {
+      margin-top: 160px;
+      display: flex;
+      justify-content: space-around;
+      width: 1000px;
+    }
+    .suggestion-box {
+      height: 200px;
+      width: 200px;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: rgb(226, 229, 231);
+    }
+    .search-box {
+      width: 1000px;
+      background-color: rgb(226, 229, 231);
+      margin-top: 20px;
+      height: 50px;
+      border: none;
+      border-radius: 40px;
+      padding-left: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #search {
+      background-color: rgb(226, 229, 231);
+      width: 60%;
+      height: 10px;
+      border: none;
+      border-radius: 40px;
+      padding: 10px;
+      padding-left: 10px;
+      outline: none;
+    }
+    .api {
+      display: none;
+    }
+    .radio:hover {
+      background-color: gray;
+    }
+    input[type="radio"]:checked + .radio {
+      background-color: gray;
+    }
+    .radio {
+      height: 50px;
+      width: 100px;
+      border: 2px solid gray;
+
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+    .api-div {
+      margin-top: 20px;
+      margin-left: 30%;
+      display: flex;
+      gap: 10px;
+    }
+    .result-div
+    {
+      margin-top: 20px;
+    }
+    .result
+    {
+      margin-top: 20px;
+      visibility: hidden;
+      border: 2px solid gray;
+      width: 80%;
+      padding: 20px;
+      border-radius: 20px;
+    }
+  </style>
+  <body>
+    <div class="main">
+      <div id="side-nav">
+        <img
+          src="/Classic_Search/menu-symbol-of-three-parallel-lines-svgrepo-com.svg"
+          id="nav-img"
+        />
+
+        <div class="chat-div" style="cursor: pointer">
+          <span class="chat">+</span>
+        </div>
+
+        <img src="/Classic_Search/icons8-chat-48.png" class="chat-icon" />
+
+        <div class="recent"></div>
+
+        <footer id="footer">
+          <div class="footer-div" style="cursor: pointer">
+            <img src="Classic_Search/icons8-help-50.png" class="help-icon" />
+            <p class="footer-span">Help</p>
+          </div>
+          <div class="footer-div" style="cursor: pointer">
+            <img src="Classic_Search/restore.png" class="activity-icon" />
+            <span class="footer-span">Activity</span>
+          </div>
+          <div class="footer-div" style="cursor: pointer">
+            <img
+              src="Classic_Search/settings-svgrepo-com.svg"
+              class="setting-icon"
+            />
+            <span class="footer-span">Settings</span>
+          </div>
+        </footer>
+      </div>
+
+      <div class="data-div">
+        <div class="data-header-div">
+          <span style="color: rgb(201, 201, 201); font-size: 20px"
+            >MultiSearch</span
+          >
+          <p class="heading-tag">Hello , Developer</p>
+          <p class="heading-tag" style="color: rgb(201, 201, 201)">
+            How can I help you today
+          </p>
+        </div>
+
+        <div class="suggestion-div">
+          <div class="suggestion-box" style="cursor: pointer">
+            <p class="suggestion-box-text" >
+              Suggest beautiful places to see on an upcoming road trip
+            </p>
+          </div>
+          <div class="suggestion-box" style="cursor: pointer">
+            <p class="suggestion-box-text">
+              Briefly summarize this concept: urban planning
+            </p>
+          </div>
+          <div class="suggestion-box" style="cursor: pointer">
+            <p class="suggestion-box-text">
+              Brainstorm team bonding activities for our work retreat
+            </p>
+          </div>
+          <div class="suggestion-box" style="cursor: pointer">
+            <p class="suggestion-box-text">
+              Improve the readability of the following code
+            </p>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <input id="search" type="text" placeholder="Enter a prompt here..." />
+          <div>
+            <img
+              style="cursor: pointer"
+              class="search-box-img"
+              src="Classic_Search/upload-folder-11494.svg"
+            />
+            <img
+              style="cursor: pointer"
+              class="search-box-img"
+              src="Classic_Search/radio-microphone-14635.svg"
+            />
+            <img
+            id ='sent'
+              style="cursor: pointer"
+              class="search-box-img"
+              src="Classic_Search/mail-2573.svg"
+            />
+          </div>
+        </div>
+
+        <div class="api-div">
+          <label for="google">
+            <input class="api" type="radio" id="google" name="api-type" value="google"/>
+
+            <div class="radio">Google</div></label
+          >
+
+          <label for="gemini">
+            <input class="api" type="radio" id="gemini" name="api-type" value="gemini"/>
+            <div class="radio">Gemini</div></label
+          >
+
+
+          <label for="wiki"
+            >
+            <input class="api" type="radio" id="wiki" name="api-type" value="wiki"/>
+            <div class="radio">Wiki</div>
+            </label
+          >
+
+          <label for="aiimages">
+            <input class="api" type="radio" id="aiimages" name="api-type" value="aiimages"/>
+            <div class="radio">AI Images</div>
+          </label>
+        </div>
+
+        <div class="result">
+
+        </div>
+        <p style="margin-top: 30px; margin-bottom: 20px;">
+          Gemini may display inaccurate info, including about people, so double-check its responses. Your privacy and Gemini Apps 
+        </p>
+      </div>
+    </div>
+    <script src="Assgnment.js"></script>
+  </body>
 </html>
