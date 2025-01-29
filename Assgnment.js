@@ -34,7 +34,7 @@ navImg.addEventListener('click',()=>
         chatSpan.innerText = '  New Chat'
         chatDiv.style.width = '100px'
         chatDiv.appendChild(chatSpan)
-        
+
         const div = document.createElement('div')
         div.style.height='200px'
         div.style.overflow='scroll'
@@ -58,6 +58,7 @@ navImg.addEventListener('click',()=>
 
             historyDiv.addEventListener('click',()=>
             {
+                 input.innerText =''
                 value = localStorage.getItem('chat'+i)
 
                 console.log(value)
@@ -69,6 +70,7 @@ navImg.addEventListener('click',()=>
 
         chatDiv.addEventListener('click',()=>
         {
+             input.innerText =''
             resultDiv.innerHTML=''
             resultDiv.style.visibility='hidden'
         })
