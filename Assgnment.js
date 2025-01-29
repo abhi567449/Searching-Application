@@ -47,7 +47,7 @@ navImg.addEventListener('click',()=>
             const chat = localStorage.getItem('chat'+i)
             chatp.innerText =chat
             const chatIconImg = document.createElement('img')
-            chatIconImg.src ='/Classic_Search/icons8-chat-48.png'
+            chatIconImg.src ='./Classic_Search/icons8-chat-48.png'
             chatIconImg.classList.add('chats-icon')
             historyDiv.appendChild(chatIconImg)
             historyDiv.appendChild(chatp)
